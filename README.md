@@ -41,7 +41,7 @@ Las pruebas evalúan las rutas del servidor y aseguran el correcto funcionamient
    expect(Array.isArray(response.body)).toBe(true);
    expect(response.body.length).toBeGreaterThan(0);
    ```
-2. Ruta DELETE /cafes/:id
+2. **Ruta DELETE /cafes/:id**
 
     - Verifica que al intentar eliminar un café con un ID inexistente se devuelve un código de estado 404.
     - Valida que el mensaje de error sea el esperado.
@@ -51,5 +51,20 @@ Las pruebas evalúan las rutas del servidor y aseguran el correcto funcionamient
     expect(response.body.message).toBe(`No se encontró ningún cafe con ese id`);
     ```
 
+3. **Prueba Ruta POST /cafes**
 
+    - verificar que devuelva un codigo 201
 
+    ```javascript
+    expect(response.statusCode).toBe(201);
+    expect(response.body).toContainEqual(newCafe);
+    ```
+
+4. **Prueba Ruta PUT /cafes**
+
+- verificar que devuelva un status 400. si intenta actualizar un cafe enviando parametro que sea diferente al id dentro del payload
+
+    ```javascript
+    expect(response.statusCode).toBe(400);
+    expect(response.body.message).toBe(`El id del parámetro no coincide con el id del café recibido`)
+    ```
